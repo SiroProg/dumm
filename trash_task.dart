@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 import 'models/post_model.dart';
 
 void main(List<String> args) async {
-  Uri uri = Uri.parse('https://dummyjson.com/posts?limit=10&skip=10&select=title,reactions,userId');
+  Uri uri = Uri.parse('https://dummyjson.com/posts/user/5');
 
   Response response = await get(uri);
 
