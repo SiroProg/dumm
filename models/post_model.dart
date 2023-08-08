@@ -1,14 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class PostModel {
-  List<Post> comments;
+  List<Post> posts;
   int total;
   int skip;
   int limit;
 
   PostModel({
-    required this.comments,
+    required this.posts,
     required this.total,
     required this.skip,
     required this.limit,
@@ -16,7 +16,7 @@ class PostModel {
 
   factory PostModel.fromJson(Map<String, Object?> json) {
     return PostModel(
-      comments: (json['comments'] as List).map((e) => Post.fromJson(e)).toList(),
+      posts: (json['posts'] as List).map((e) => Post.fromJson(e)).toList(),
       total: json['total'] as int,
       skip: json['skip'] as int,
       limit: json['limit'] as int,
@@ -26,38 +26,42 @@ class PostModel {
 
 class Post {
   int id;
+  String title;
   String body;
-  int postId;
-  User user;
+  int userId;
+  List tags;
+  int reactions;
 
-  Post(
-      {required this.id,
-      required this.body,
-      required this.postId,
-      required this.user});
+  Post({
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.userId,
+    required this.tags,
+    required this.reactions,
+  });
 
   factory Post.fromJson(Map<String, Object?> json) {
     return Post(
-        id: json['id'] as int,
-        body: json['body'] as String,
-        postId: json['postId'] as int,
-        user: User.fromMap(json['user'] as Map<String, Object?>));
-  }
-}
-
-class User {
-  int id;
-  String username;
-
-  User({
-    required this.id,
-    required this.username,
-  });
-
-  factory User.fromMap(Map<String, Object?> json) {
-    return User(
       id: json['id'] as int,
-      username: json['username'] as String,
+      title: json['title'] as String,
+      body: json['body'] as String,
+      userId: json['userId'] as int,
+      reactions: json['reactions'] as int,
+      tags: List.from(
+        (json['tags'] as List).toList(),
+      ),
     );
+  }
+
+  Map<String, Object?> toJson() {
+    return <String, Object?>{
+      'id': id,
+      'title': title,
+      'body': body,
+      'userId': userId,
+      'tags': tags,
+      'reactions': reactions,
+    };
   }
 }
