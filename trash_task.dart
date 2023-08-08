@@ -5,20 +5,11 @@ import 'package:http/http.dart';
 import 'models/post_model.dart';
 
 void main(List<String> args) async {
-  Uri uri = Uri.parse('https://dummyjson.com/posts/add');
+  Uri uri = Uri.parse('https://dummyjson.com/posts/1');
 
-  Post postNew = Post(
-    id: 123,
-    title: 'new',
-    body: 'new body',
-    userId: 5,
-    tags: ['love'],
-    reactions: 1,
-  );
-
-  Response response = await post(uri,
+  Response response = await put(uri,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(postNew.toJson()));
+      body: jsonEncode({'title' : 'New title'}));
 
   print(response.body);
 }
