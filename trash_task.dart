@@ -5,11 +5,11 @@ import 'package:http/http.dart';
 import 'models/post_model.dart';
 
 void main(List<String> args) async {
-  Uri uri = Uri.parse('https://dummyjson.com/posts/search?q=love');
+  Uri uri = Uri.parse('https://dummyjson.com/posts?limit=10&skip=10&select=title,reactions,userId');
 
   Response response = await get(uri);
 
   PostModel postModel = PostModel.fromJson(jsonDecode(response.body));
 
-  print(postModel.total);
+  print(postModel.posts[0].title);
 }

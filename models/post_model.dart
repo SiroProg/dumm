@@ -24,17 +24,13 @@ class PostModel {
 class Post {
   int id;
   String title;
-  String body;
   int userId;
-  List tags;
   int reactions;
 
   Post({
     required this.id,
     required this.title,
-    required this.body,
     required this.userId,
-    required this.tags,
     required this.reactions,
   });
 
@@ -42,12 +38,8 @@ class Post {
     return Post(
       id: json['id'] as int,
       title: json['title'] as String,
-      body: json['body'] as String,
       userId: json['userId'] as int,
       reactions: json['reactions'] as int,
-      tags: List.from(
-        (json['tags'] as List).toList(),
-      ),
     );
   }
 }
